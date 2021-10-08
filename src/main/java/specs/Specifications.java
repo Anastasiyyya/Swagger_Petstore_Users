@@ -6,6 +6,8 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import objects.User;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 public class Specifications {
@@ -18,10 +20,62 @@ public class Specifications {
             .setAccept(ContentType.JSON)
             .build();
 
+
+    //POST
     public ValidatableResponse createUser(User user) {
         return given().spec(SPEC)
-                .when().body(user)
-                .post(BASE_URL + "user")
+                .body(user)
+                .when()
+                .post("user")
                 .then().log().all();
     }
+
+    public ValidatableResponse createWithArray(List<User> users) {
+        return given().spec(SPEC)
+                .body(users)
+                .when()
+                .post("createWithArray")
+                .then()
+                .log().all();
+    }
+
+    public ValidatableResponse createWithList(List<User> users) {
+        return given().spec(SPEC)
+                .body(users)
+                .when()
+                .post("createWithList")
+                .then()
+                .log().all();
+    }
+
+
+    //GET
+    public ValidatableResponse getUserByUsername(String username) {
+        return given().spec(SPEC)
+                .body(username)
+                .when()
+                .get("user/" + username)
+                .then()
+                .log().all();
+    }
+
+    public ValidatableResponse logUserIntoTheSystem(String username, String password) {
+        return given().spec(SPEC)
+                .body(username)
+                .when()
+                .get("user/" + "login?username=" + username + "&password=" + password)
+                .then()
+                .log().all();
+    }
+
+    public ValidatableResponse logout() {
+        return given().spec(SPEC)
+                .when()
+                .get("user/logout")
+                .then()
+                .log().all();
+    }
+
+    //DELETE
+
 }
