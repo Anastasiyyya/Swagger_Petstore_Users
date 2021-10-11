@@ -43,7 +43,8 @@ public class Specifications {
         return given().spec(SPEC)
                 .body(users)
                 .when()
-                .post("createWithList")
+                .contentType(ContentType.JSON)
+                .post("user/createWithList")
                 .then()
                 .log().all();
     }
@@ -76,6 +77,23 @@ public class Specifications {
                 .log().all();
     }
 
-    //DELETE
+    //PUT
+    public ValidatableResponse updateUser(String username) {
+        return given().spec(SPEC)
+                .body(username)
+                .when()
+                .put("user/" + username)
+                .then()
+                .log().all();
+    }
 
+    //DELETE
+    public ValidatableResponse deleteUser(String username) {
+        return given().spec(SPEC)
+                .body(username)
+                .when()
+                .delete("user/" + username)
+                .then()
+                .log().all();
+    }
 }
