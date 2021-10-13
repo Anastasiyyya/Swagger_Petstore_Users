@@ -1,6 +1,10 @@
 package specs;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.config.DecoderConfig;
+import io.restassured.config.EncoderConfig;
+import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -9,21 +13,28 @@ import objects.User;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.mapper.ObjectMapperType.GSON;
 
 public class Specifications {
 
     public static final String BASE_URL = "https://petstore.swagger.io/v2/";
 
+    private static final RestAssuredConfig CONFIG = RestAssuredConfig.config()
+            .decoderConfig(new DecoderConfig("UTF-8"))
+            .encoderConfig(new EncoderConfig("UTF-8","UTF-8"))
+            .objectMapperConfig(new ObjectMapperConfig(GSON));
+
     public static RequestSpecification SPEC = new RequestSpecBuilder()
             .setBaseUri(BASE_URL)
             .setContentType(ContentType.JSON)
             .setAccept(ContentType.JSON)
+            .setConfig(CONFIG)
             .build();
-
 
     //POST
     public ValidatableResponse createUser(User user) {
         return given().spec(SPEC)
+
                 .body(user)
                 .when()
                 .post("user")
@@ -53,10 +64,11 @@ public class Specifications {
     //GET
     public ValidatableResponse getUserByUsername(String username) {
         return given().spec(SPEC)
-                .body(username)
                 .when()
+                .body(username)
                 .get("user/" + username)
                 .then()
+                .statusCode(200)
                 .log().all();
     }
 
