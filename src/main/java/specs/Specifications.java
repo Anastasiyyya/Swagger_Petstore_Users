@@ -34,7 +34,6 @@ public class Specifications {
     //POST
     public ValidatableResponse createUser(User user) {
         return given().spec(SPEC)
-
                 .body(user)
                 .when()
                 .post("user")
@@ -68,7 +67,6 @@ public class Specifications {
                 .body(username)
                 .get("user/" + username)
                 .then()
-                .statusCode(200)
                 .log().all();
     }
 
@@ -90,9 +88,10 @@ public class Specifications {
     }
 
     //PUT
-    public ValidatableResponse updateUser(String username) {
+    public ValidatableResponse updateUser(String username, User newUser) {
         return given().spec(SPEC)
                 .body(username)
+                .body(newUser)
                 .when()
                 .put("user/" + username)
                 .then()
