@@ -6,15 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CreateWithListTests extends BaseTest{
-
+public class CreateWithArrayTests extends BaseTest{
 
     @Test
     public void twoUsersWithCorrectDataTest() {
 
         specifications.logout();
 
-        specifications.createWithList(Users.USERS_LIST_WITH_TWO_USERS)
+        specifications.createWithArray(Users.USERS_LIST_WITH_TWO_USERS)
                 .body("type", equalTo("unknown"),
                         "message", equalTo("ok"))
                 .statusCode(200);
@@ -32,8 +31,7 @@ public class CreateWithListTests extends BaseTest{
 
         specifications.logout();
 
-        specifications.createWithList(Users.EMPTY_USERS_LIST)
+        specifications.createWithArray(Users.EMPTY_USERS_LIST)
                 .statusCode(400);
     }
-
 }

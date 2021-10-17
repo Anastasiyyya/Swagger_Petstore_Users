@@ -44,7 +44,7 @@ public class Specifications {
         return given().spec(SPEC)
                 .body(users)
                 .when()
-                .post("createWithArray")
+                .post("user/createWithArray")
                 .then()
                 .log().all();
     }

@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LogsUserIntoTheSystem extends BaseTest {
 
-    @Test(description = "")
+    @Test
     public void logInWithCorrectUsernamePasswordTest() {
 
         specifications.logout()
@@ -21,6 +21,8 @@ public class LogsUserIntoTheSystem extends BaseTest {
                         "message", containsString("logged in user session"))
                 .statusCode(200);
 
+        specifications.deleteUser(Users.USER3.getUsername());
+
         specifications.createUser(Users.USER3)
                 .body("type", equalTo("unknown"),
                         "message", containsString(String.valueOf(Users.USER3.getUserStatus())))
@@ -31,7 +33,7 @@ public class LogsUserIntoTheSystem extends BaseTest {
         Assert.assertEquals(createdUser, Users.USER3);
     }
 
-    @Test(description = "")
+    @Test
     public void logInWithIncorrectPasswordTest() {
         specifications.logout()
                 .body("type", equalTo("unknown"),
@@ -43,6 +45,8 @@ public class LogsUserIntoTheSystem extends BaseTest {
                         "message", containsString("logged in user session"))
                 .statusCode(200);
 
+        specifications.deleteUser(Users.USER3.getUsername());
+
         specifications.createUser(Users.USER3)
                 .body("type", equalTo("unknown"),
                         "message", containsString(String.valueOf(Users.USER3.getUserStatus())))
@@ -53,7 +57,7 @@ public class LogsUserIntoTheSystem extends BaseTest {
         Assert.assertEquals(createdUser, Users.USER3);
     }
 
-    @Test(description = "")
+    @Test
     public void logInWithEmptyPasswordFieldTest() {
         specifications.logout()
                 .body("type", equalTo("unknown"),
@@ -75,7 +79,7 @@ public class LogsUserIntoTheSystem extends BaseTest {
         Assert.assertEquals(createdUser, Users.USER3);
     }
 
-    @Test(description = "")
+    @Test
     public void logInWithEmptyUsernameFieldTest() {
         specifications.logout()
                 .body("type", equalTo("unknown"),
@@ -97,7 +101,7 @@ public class LogsUserIntoTheSystem extends BaseTest {
         Assert.assertEquals(createdUser, Users.USER3);
     }
 
-    @Test(description = "")
+    @Test
     public void logInWithEmptyFieldsTest() {
         specifications.logout()
                 .body("type", equalTo("unknown"),

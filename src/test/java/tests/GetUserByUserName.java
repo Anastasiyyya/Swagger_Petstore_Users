@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GetUserByUserName extends BaseTest{
 
-    @Test(description = "")
+    @Test
     public void getUserInvalidUsernameTest() {
 
         specifications.getUserByUsername("!!!")
@@ -16,7 +16,7 @@ public class GetUserByUserName extends BaseTest{
 
     }
 
-    @Test(description = "")
+    @Test
     public void getUserWithNonExistentUsernameTest() {
 
         specifications.getUserByUsername("user3000")
@@ -27,7 +27,7 @@ public class GetUserByUserName extends BaseTest{
 
     }
 
-    @Test(description = "")
+    @Test
     public void putInUsernameFieldEmptyStringTest() {
 
         specifications.getUserByUsername("")

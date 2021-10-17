@@ -32,7 +32,7 @@ public class Users {
 
     public static final User INVALID_USER = User.builder()
             .id(10)
-            .username("0")
+            .username("username1")
             .build();
 
     public static final User USER2 = User.builder()
