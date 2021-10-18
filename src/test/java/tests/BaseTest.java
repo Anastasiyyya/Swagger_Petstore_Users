@@ -8,13 +8,12 @@ public class BaseTest {
 
     Specifications specifications;
 
-
     @BeforeMethod
     public void logOutLogIn(){
         initPages();
 
         specifications.logout();
-        specifications.logUserIntoTheSystem(Users.USER1.getUsername(),Users.USER1.getPassword());
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
 
         specifications.deleteUser(Users.USER1.getUsername());
         specifications.deleteUser(Users.USER2.getUsername());

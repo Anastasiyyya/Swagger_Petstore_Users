@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CreateWithListTests extends BaseTest{
 
-
     @Test
     public void twoUsersWithCorrectDataTest() {
 
@@ -26,7 +25,6 @@ public class CreateWithListTests extends BaseTest{
         Assert.assertEquals(user2, Users.USERS_LIST_WITH_TWO_USERS.get(1));
     }
 
-
     @Test
     public void emptyUsersListTest() {
 
@@ -35,5 +33,4 @@ public class CreateWithListTests extends BaseTest{
         specifications.createWithList(Users.EMPTY_USERS_LIST)
                 .statusCode(400);
     }
-
 }

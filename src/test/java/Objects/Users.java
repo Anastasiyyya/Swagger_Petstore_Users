@@ -8,9 +8,20 @@ import java.util.List;
 
 public class Users {
 
+    public static final User ADMIN = User.builder()
+            .id(1)
+            .username("admin")
+            .firstName("firstname1")
+            .lastName("lastname1")
+            .email("email1@gmail.com")
+            .password("adminpass")
+            .phone("111111111")
+            .userStatus(1)
+            .build();
+
     public static final User USER1 = User.builder()
             .id(1)
-            .username("username1")
+            .username("jhbvkbk")
             .firstName("firstname1")
             .lastName("lastname1")
             .email("email1@gmail.com")
