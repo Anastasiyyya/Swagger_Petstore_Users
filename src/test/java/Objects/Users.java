@@ -2,6 +2,7 @@ package Objects;
 
 import objects.User;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,8 +21,8 @@ public class Users {
             .build();
 
     public static final User USER1 = User.builder()
-            .id(1)
-            .username("jhbvkbk")
+            .id(10)
+            .username("username1")
             .firstName("firstname1")
             .lastName("lastname1")
             .email("email1@gmail.com")
@@ -32,7 +33,7 @@ public class Users {
 
     public static final User USER1_UPDATE = User.builder()
             .id(2222)
-            .username("newUsername1")
+            .username("username1")
             .firstName("newFirstname1")
             .lastName("newLastname1")
             .email("newEmail1@gmail.com")
@@ -71,4 +72,7 @@ public class Users {
     public static final List<User> EMPTY_USERS_LIST = Collections.emptyList();
     public static final List<User> USERS_LIST_WITH_ONE_USER = Collections.singletonList(USER1);
     public static final List<User> USERS_LIST_WITH_TWO_USERS = Arrays.asList(USER1,USER2);
+
+    public static final User[] USERS_ARRAY_WITH_TWO_USERS = {USER1,USER2};
+    public static final User[] EMPTY_USERS_ARRAY = {};
 }

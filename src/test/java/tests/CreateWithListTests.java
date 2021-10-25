@@ -11,8 +11,6 @@ public class CreateWithListTests extends BaseTest{
     @Test
     public void twoUsersWithCorrectDataTest() {
 
-        specifications.logout();
-
         specifications.createWithList(Users.USERS_LIST_WITH_TWO_USERS)
                 .body("type", equalTo("unknown"),
                         "message", equalTo("ok"))

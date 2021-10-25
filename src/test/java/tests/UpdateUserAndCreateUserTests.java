@@ -24,13 +24,14 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
                         "message", equalTo("ok"))
                 .statusCode(200);
 
-        specifications.updateUser(Users.USER1.getUsername(),Users.USER1_UPDATE)
+        specifications.updateUser(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername(),Users.USER1_UPDATE)
                 .body("type", equalTo("unknown"),
                         "message",  equalTo(String.valueOf(Users.USER1_UPDATE.getId())))
                 .statusCode(200);
 
-        User updatedUser = specifications.getUserByUsername(Users.USER1_UPDATE.getUsername()).extract().body().as(User.class);
+        User updatedUser = specifications.getUserByUsername(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername()).extract().body().as(User.class);
 
+        specifications.getUserByUsername(Users.USER1_UPDATE.getUsername());
         Assert.assertEquals(updatedUser, Users.USER1_UPDATE);
 
     }
@@ -64,10 +65,12 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
     @Test
     public void updateUserWithExistsUsernameAndInvalidDataTest() {
 
+        specifications.createWithList(Users.USERS_LIST_WITH_ONE_USER)
+                        .statusCode(200);
+
         specifications.updateUser(Users.USER1.getUsername(),Users.INVALID_USER)
                 .body("type", equalTo("unknown"),
-                        "message", equalTo(String.valueOf(Users.INVALID_USER.getId())))
-                .statusCode(200);
+                        "message", equalTo(String.valueOf(Users.INVALID_USER.getId())));
 
         User updatedUser = specifications.getUserByUsername(Users.USER1.getUsername()).extract().body().as(User.class);
 

@@ -3,10 +3,10 @@ package tests;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GetUserByUserName extends BaseTest{
+public class GetUserByUserNameTests extends BaseTest{
 
     @Test
-    public void getUserInvalidUsernameTest() {
+    public void getUserWithInvalidUsernameTest() {
 
         specifications.getUserByUsername("!!!")
                 .body("type", equalTo("error"),

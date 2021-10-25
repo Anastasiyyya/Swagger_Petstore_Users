@@ -5,13 +5,15 @@ import io.restassured.config.DecoderConfig;
 import io.restassured.config.EncoderConfig;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import objects.User;
 
+import java.lang.reflect.Array;
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.mapper.ObjectMapperType.GSON;
 
@@ -29,6 +31,7 @@ public class Specifications {
             .setContentType(ContentType.JSON)
             .setAccept(ContentType.JSON)
             .setConfig(CONFIG)
+            //.log(LogDetail.ALL)
             .build();
 
     //POST
@@ -40,7 +43,7 @@ public class Specifications {
                 .then().log().all();
     }
 
-    public ValidatableResponse createWithArray(List<User> users) {
+    public ValidatableResponse createWithArray(User[] users) {
         return given().spec(SPEC)
                 .body(users)
                 .when()
@@ -59,7 +62,6 @@ public class Specifications {
                 .log().all();
     }
 
-
     //GET
     public ValidatableResponse getUserByUsername(String username) {
         return given().spec(SPEC)
@@ -68,6 +70,15 @@ public class Specifications {
                 .get("user/" + username)
                 .then()
                 .log().all();
+    }
+
+    public void waitAPositiveResponse(String username) {
+        int statusCode;
+        do {
+            Response response = getUserByUsername(username).extract().response();
+            statusCode = response.getStatusCode();
+            System.out.println(statusCode);
+        } while (statusCode != 200);
     }
 
     public ValidatableResponse logUserIntoTheSystem(String username, String password) {

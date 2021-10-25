@@ -15,11 +15,11 @@ public class BaseTest {
         specifications.logout();
         specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
 
-        specifications.deleteUser(Users.USER1.getUsername());
+       /* specifications.deleteUser(Users.USER1.getUsername());
         specifications.deleteUser(Users.USER2.getUsername());
         specifications.deleteUser(Users.USER3.getUsername());
         specifications.deleteUser(Users.USER1_UPDATE.getUsername());
-        specifications.deleteUser(Users.INVALID_USER.getUsername());
+        specifications.deleteUser(Users.INVALID_USER.getUsername());*/
     }
 
     public void initPages() {
