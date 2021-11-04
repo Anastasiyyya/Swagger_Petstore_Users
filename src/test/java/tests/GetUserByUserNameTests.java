@@ -13,7 +13,6 @@ public class GetUserByUserNameTests extends BaseTest{
                         "message", equalTo("User not found"),
                         "code", equalTo(1))
                 .statusCode(404);
-
     }
 
     @Test
@@ -24,7 +23,6 @@ public class GetUserByUserNameTests extends BaseTest{
                         "message", equalTo("User not found"),
                         "code", equalTo(1))
                 .statusCode(404);
-
     }
 
     @Test
@@ -33,6 +31,5 @@ public class GetUserByUserNameTests extends BaseTest{
         specifications.getUserByUsername("")
                 .body("type", equalTo("unknown"))
                 .statusCode(405);
-
     }
 }

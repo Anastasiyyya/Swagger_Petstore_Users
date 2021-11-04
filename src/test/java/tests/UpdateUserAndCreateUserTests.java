@@ -11,7 +11,9 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
     @Test
     public void updateNonExistentUserTest() {
 
-        specifications.updateUser("user3000",Users.USER1_UPDATE)
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
+        specifications.updateUser("nonExistentUser",Users.UPDATED_USER)
                 .body("type", equalTo("unknown"))
                 .statusCode(404);
     }
@@ -24,15 +26,17 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
                         "message", equalTo("ok"))
                 .statusCode(200);
 
-        specifications.updateUser(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername(),Users.USER1_UPDATE)
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
+        specifications.updateUser(Users.USER_FOR_UPDATING.getUsername(),Users.UPDATED_USER)
                 .body("type", equalTo("unknown"),
-                        "message",  equalTo(String.valueOf(Users.USER1_UPDATE.getId())))
+                        "message",  equalTo(String.valueOf(Users.UPDATED_USER.getId())))
                 .statusCode(200);
 
-        User updatedUser = specifications.getUserByUsername(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername()).extract().body().as(User.class);
+        User updatedUser = specifications.getUserByUsername(Users.UPDATED_USER.getUsername()).extract().body().as(User.class);
 
-        specifications.getUserByUsername(Users.USER1_UPDATE.getUsername());
-        Assert.assertEquals(updatedUser, Users.USER1_UPDATE);
+        //specifications.getUserByUsername(Users.USER1_UPDATE.getUsername());
+        Assert.assertEquals(updatedUser, Users.UPDATED_USER);
 
     }
 
@@ -46,9 +50,9 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
                         "message", equalTo("ok"))
                 .statusCode(200);
 
-        specifications.updateUser(Users.USER1.getUsername(),Users.USER1_UPDATE)
+        specifications.updateUser(Users.USER_FOR_UPDATING.getUsername(),Users.UPDATED_USER)
                 .body("type", equalTo("unknown"),
-                        "message",  equalTo(String.valueOf(Users.USER1_UPDATE.getId())))
+                        "message",  equalTo(String.valueOf(Users.UPDATED_USER.getId())))
                 .statusCode(404);
 
     }
@@ -56,7 +60,9 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
     @Test
     public void updateUserWithEmptyUsernameTest() {
 
-        specifications.updateUser("",Users.USER1_UPDATE)
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
+        specifications.updateUser("",Users.UPDATED_USER)
                 .body("type", equalTo("unknown"))
                 .statusCode(400);
 
@@ -68,12 +74,14 @@ public class UpdateUserAndCreateUserTests extends BaseTest{
         specifications.createWithList(Users.USERS_LIST_WITH_ONE_USER)
                         .statusCode(200);
 
-        specifications.updateUser(Users.USER1.getUsername(),Users.INVALID_USER)
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
+        specifications.updateUser(Users.USER_FOR_UPDATING.getUsername(),Users.INVALID_USER_FOR_UPDATING)
                 .body("type", equalTo("unknown"),
                         "message", equalTo(String.valueOf(Users.INVALID_USER.getId())));
 
-        User updatedUser = specifications.getUserByUsername(Users.USER1.getUsername()).extract().body().as(User.class);
+        User updatedUser = specifications.getUserByUsername(Users.INVALID_USER_FOR_UPDATING.getUsername()).extract().body().as(User.class);
 
-        Assert.assertEquals(updatedUser, Users.INVALID_USER);
+        Assert.assertEquals(updatedUser, Users.INVALID_USER_FOR_UPDATING);
     }
 }

@@ -12,8 +12,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CreateWithArrayTests extends BaseTest{
 
-    //тесты работают
-
     @Test
     public void twoUsersWithCorrectDataTest() {
 
@@ -30,8 +28,7 @@ public class CreateWithArrayTests extends BaseTest{
         Assert.assertEquals(Arrays.stream(Users.USERS_ARRAY_WITH_TWO_USERS).findFirst(), user1.stream().findFirst());
     }
 
-
-    @Test //должен быть failed
+    @Test
     public void emptyUsersListTest() {
 
         specifications.logout();

@@ -7,31 +7,31 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DeleteUserTests extends BaseTest {
 
-    @Test //should be passed (+-)
+    @Test
     public void deleteUserWithExistUsernameTest() {
 
-        specifications.createWithList(Users.USERS_LIST_WITH_TWO_USERS)
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
+        specifications.createWithList(Users.USERS_LIST_WITH_ONE_USER)
                 .body("type", equalTo("unknown"),
                         "message", equalTo("ok"))
                 .statusCode(200);
 
-        specifications.waitAPositiveResponse(Users.USERS_LIST_WITH_TWO_USERS.get(0).getUsername());
-
-        specifications.getUserByUsername(Users.USERS_LIST_WITH_TWO_USERS.get(0).getUsername())
+        specifications.getUserByUsername(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername())
                         .statusCode(200);
 
-        specifications.deleteUser(Users.USERS_LIST_WITH_TWO_USERS.get(0).getUsername())
+        specifications.deleteUser(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername())
                 .body("type", equalTo("unknown"),
-                        "message", equalTo(Users.USERS_LIST_WITH_TWO_USERS.get(0).getUsername()))
+                        "message", equalTo(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername()))
                 .statusCode(200);
 
-        specifications.getUserByUsername(Users.USERS_LIST_WITH_TWO_USERS.get(0).getUsername())
+        specifications.getUserByUsername(Users.USERS_LIST_WITH_ONE_USER.get(0).getUsername())
                 .body("type", equalTo("error"),
                         "message", equalTo("User not found"))
                 .statusCode(404);
     }
 
-    @Test //should be failed
+    @Test
     public void deleteUserWithoutLogIntoTheSystemTest() {
 
         specifications.logout();
@@ -50,7 +50,7 @@ public class DeleteUserTests extends BaseTest {
                 .statusCode(404);
     }
 
-    @Test //should be failed
+    @Test
     public void deleteUserWithNonExistentUsernameTest() {
 
         specifications.deleteUser("UserWithNonExistentUsername")
@@ -58,7 +58,7 @@ public class DeleteUserTests extends BaseTest {
         // 400 Invalid username supplied
     }
 
-    @Test //should be failed
+    @Test
     public void deleteUserWithEmptyUsernameTest() {
 
         specifications.deleteUser("")
@@ -67,6 +67,4 @@ public class DeleteUserTests extends BaseTest {
         //400 Bad Request
         //405 Method not allowed
     }
-
-
 }

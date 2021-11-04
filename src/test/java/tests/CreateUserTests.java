@@ -8,6 +8,8 @@ public class CreateUserTests extends BaseTest {
     @Test
     public void createUserWithLogIntoTheSystemTest() {
 
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
         specifications.deleteUser(Users.USER1.getUsername());
 
         specifications.createUser(Users.USER1)
@@ -28,7 +30,7 @@ public class CreateUserTests extends BaseTest {
                 .statusCode(200);
 
         specifications.getUserByUsername(Users.USER1.getUsername())
-                .statusCode(200);
+                .statusCode(400);
     }
 
     @Test

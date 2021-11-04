@@ -22,23 +22,56 @@ public class Users {
 
     public static final User USER1 = User.builder()
             .id(10)
-            .username("username1")
-            .firstName("firstname1")
-            .lastName("lastname1")
+            .username("AS_username11")
+            .firstName("AS_firstname1")
+            .lastName("AS_lastname1")
             .email("email1@gmail.com")
-            .password("password1")
+            .password("AS_password1")
             .phone("111111111")
             .userStatus(1)
             .build();
 
-    public static final User USER1_UPDATE = User.builder()
-            .id(2222)
-            .username("username1")
-            .firstName("newFirstname1")
-            .lastName("newLastname1")
-            .email("newEmail1@gmail.com")
-            .password("newPassword1")
+    public static final User USER2 = User.builder()
+            .id(2)
+            .username("AS_username2")
+            .firstName("AS_firstname2")
+            .lastName("AS_lastname2")
+            .email("email2@gmail.com")
+            .password("AS_password2")
+            .phone("2222222")
+            .userStatus(2)
+            .build();
+
+    public static final User USER3 = User.builder()
+            .id(3)
+            .username("AS_username3")
+            .firstName("AS_firstname3")
+            .lastName("AS_lastname3")
+            .email("email3@gmail.com")
+            .password("AS_password3")
             .phone("111111111")
+            .userStatus(3)
+            .build();
+
+    public static final User USER_FOR_UPDATING = User.builder()
+            .id(3434)
+            .username("upd")
+            .firstName("firstName_for_upd")
+            .lastName("lastname_for_upd")
+            .email("emailForUpd@gmail.com")
+            .password("password_for_upd")
+            .phone("1123456789")
+            .userStatus(1)
+            .build();
+
+    public static final User UPDATED_USER = User.builder()
+            .id(3434)
+            .username("upd")
+            .firstName("firstName_for_updated")
+            .lastName("lastname_for_upd")
+            .email("emailForUpd@gmail.com")
+            .password("password_for_upd")
+            .phone("1123456789")
             .userStatus(1)
             .build();
 
@@ -47,26 +80,9 @@ public class Users {
             .username("username1")
             .build();
 
-    public static final User USER2 = User.builder()
-            .id(2)
-            .username("username2")
-            .firstName("firstname2")
-            .lastName("lastname2")
-            .email("email2@gmail.com")
-            .password("password2")
-            .phone("2222222")
-            .userStatus(2)
-            .build();
-
-    public static final User USER3 = User.builder()
-            .id(3)
-            .username("username3")
-            .firstName("firstname3")
-            .lastName("lastname3")
-            .email("email3@gmail.com")
-            .password("password3")
-            .phone("111111111")
-            .userStatus(3)
+    public static final User INVALID_USER_FOR_UPDATING = User.builder()
+            .id(10)
+            .username("upd")
             .build();
 
     public static final List<User> EMPTY_USERS_LIST = Collections.emptyList();
