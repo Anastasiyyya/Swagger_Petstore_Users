@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class LogsUserIntoTheSystemTests extends BaseTest {
 
     @Test
-    public void logInWithCorrectUsernamePasswordTest() {
+    public void logInWithCorrectUsernameAndPasswordTest() {
 
         specifications.logout()
                 .body("type", equalTo("unknown"),
