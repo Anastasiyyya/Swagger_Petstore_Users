@@ -2,7 +2,6 @@ package tests;
 
 import Objects.Users;
 import org.testng.annotations.Test;
-
 import static org.hamcrest.Matchers.equalTo;
 
 public class DeleteUserTests extends BaseTest {
@@ -53,13 +52,17 @@ public class DeleteUserTests extends BaseTest {
     @Test
     public void deleteUserWithNonExistentUsernameTest() {
 
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
+
         specifications.deleteUser("UserWithNonExistentUsername")
-                .statusCode(400);
+                .statusCode(404);
         // 400 Invalid username supplied
     }
 
     @Test
     public void deleteUserWithEmptyUsernameTest() {
+
+        specifications.logUserIntoTheSystem(Users.ADMIN.getUsername(),Users.ADMIN.getPassword());
 
         specifications.deleteUser("")
                 .body("type", equalTo("unknown"))
