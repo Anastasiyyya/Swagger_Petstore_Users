@@ -56,7 +56,6 @@ public class DeleteUserTests extends BaseTest {
 
         specifications.deleteUser("UserWithNonExistentUsername")
                 .statusCode(404);
-        // 400 Invalid username supplied
     }
 
     @Test
@@ -67,7 +66,5 @@ public class DeleteUserTests extends BaseTest {
         specifications.deleteUser("")
                 .body("type", equalTo("unknown"))
                 .statusCode(400);
-        //400 Bad Request
-        //405 Method not allowed
     }
 }
